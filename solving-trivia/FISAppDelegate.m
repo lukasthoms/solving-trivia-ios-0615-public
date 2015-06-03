@@ -16,13 +16,150 @@
 -(NSString*) solveTrivia
 {
 
-    // write your solution here!
+    NSArray *states = @[@"Alabama",
+                        @"Alaska",
+                        @"Arizona",
+                        @"Arkansas",
+                        @"California",
+                        @"Colorado",
+                        @"Connecticut",
+                        @"Delaware",
+                        @"Florida",
+                        @"Georgia",
+                        @"Hawaii",
+                        @"Idaho",
+                        @"Illinois",
+                        @"Indiana",
+                        @"Iowa",
+                        @"Kansas",
+                        @"Kentucky",
+                        @"Louisiana",
+                        @"Maine",
+                        @"Maryland",
+                        @"Massachusetts",
+                        @"Michigan",
+                        @"Minnesota",
+                        @"Mississippi",
+                        @"Missouri",
+                        @"Montana",
+                        @"Nebraska",
+                        @"Nevada",
+                        @"New Hampshire",
+                        @"New Jersey",
+                        @"New Mexico",
+                        @"New York",
+                        @"North Carolina",
+                        @"North Dakota",
+                        @"Ohio",
+                        @"Oklahoma",
+                        @"Oregon",
+                        @"Pennsylvania",
+                        @"Rhode Island",
+                        @"South Carolina",
+                        @"South Dakota",
+                        @"Tennessee",
+                        @"Texas",
+                        @"Utah",
+                        @"Vermont",
+                        @"Virginia",
+                        @"Washington",
+                        @"West Virginia",
+                        @"Wisconsin",
+                        @"Wyoming"];
     
-    return @"";
+    NSArray *capitals = @[
+                          @"Montgomery",
+                          @"Juneau",
+                          @"Phoenix",
+                          @"Little Rock",
+                          @"Sacramento",
+                          @"Denver",
+                          @"Hartford",
+                          @"Dover",
+                          @"Tallahassee",
+                          @"Atlanta",
+                          @"Honolulu",
+                          @"Boise",
+                          @"Springfield",
+                          @"Indianapolis",
+                          @"Des Moines",
+                          @"Topeka",
+                          @"Frankfort",
+                          @"Baton Rouge",
+                          @"Augusta",
+                          @"Annapolis",
+                          @"Boston",
+                          @"Lansing",
+                          @"St. Paul",
+                          @"Jackson",
+                          @"Jefferson City",
+                          @"Helena",
+                          @"Lincoln",
+                          @"Carson City",
+                          @"Concord",
+                          @"Trenton",
+                          @"Santa Fe",
+                          @"Albany",
+                          @"Raleigh",
+                          @"Bismarck",
+                          @"Columbus",
+                          @"Oklahoma City",
+                          @"Salem",
+                          @"Harrisburg",
+                          @"Providence",
+                          @"Columbia",
+                          @"Pierre",
+                          @"Nashville",
+                          @"Austin",
+                          @"Salt Lake City",
+                          @"Montpelier",
+                          @"Richmond",
+                          @"Olympia",
+                          @"Charleston",
+                          @"Madison",
+                          @"Cheyenne"];
+
+    NSMutableString *solution = [[NSMutableString alloc] init];
+    
+    for (NSUInteger i=0; i<states.count; i++) {
+        
+        NSString *lowercaseState = [[states objectAtIndex:i] lowercaseString];
+        NSMutableArray *stateLetters = [[NSMutableArray alloc] init];
+        for (NSUInteger y=0; y<lowercaseState.length; y++) {
+            
+            NSString *letter = [[NSString alloc] initWithFormat:@"%C",[lowercaseState characterAtIndex:y] ];
+            [stateLetters addObject:letter];
+        }
+        
+        NSString *lowercaseCapital = [[capitals objectAtIndex:i] lowercaseString];
+        NSMutableArray *capitalLetters = [[NSMutableArray alloc] init];
+        for (NSUInteger y=0; y<lowercaseCapital.length; y++) {
+            NSString *letter = [[NSString alloc] initWithFormat:@"%C",[lowercaseCapital characterAtIndex:y] ];
+            [capitalLetters addObject:letter];
+        } NSLog(@"%@", capitalLetters);
+        
+        BOOL match = NO;
+        for (NSUInteger y=0; y<stateLetters.count; y++) {
+            for (NSUInteger j=0; j<capitalLetters.count; j++) {
+                if ([stateLetters[y] isEqualToString:capitalLetters[j]]) {
+                    match = YES;
+                    NSLog(@"A match was found.");
+                }
+            }
+        }
+        if (match == NO) {
+            [solution appendString:states[i]];
+        } else {
+            match = YES;
+        }
+    }
+    NSLog(@"%@", solution);
+    
+    return solution;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [self solveTrivia];
     return YES;
 }
 
